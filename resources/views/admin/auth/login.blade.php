@@ -2,7 +2,7 @@
 @section('admin_content')
     <div class="d-flex align-items-center justify-content-center bg-sl-primary ht-100v">
       <div class="login-wrapper wd-300 wd-xs-350 pd-25 pd-xs-40 bg-white">
-        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">E <span class="tx-info tx-normal">Shop</span></div>
+        <div class="signin-logo tx-center tx-24 tx-bold tx-inverse">E-<span class="tx-info tx-normal">techshop</span></div>
         <div class="tx-center mg-b-60">Admin Panel</div>
         <form action="{{ route('admin.login') }}" method="post">
             @csrf
@@ -25,7 +25,7 @@
             </div><!-- form-group -->
           <button type="submit" class="btn btn-info btn-block">Sign In</button>
      </form>
-       
+
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -45,7 +46,23 @@ class LoginController extends Controller
          }else{
             return view('admin.auth.login');
          }
-        
+
+    }
+
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::guard('admin')->attempt($credentials)) {
+
+            return redirect()->route('dashboard');
+        }
+
+        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
     }
 
     protected function guard()

@@ -8,7 +8,7 @@
 
 <div class="super_container">
 
-	
+
 	<!-- Home -->
 
 	<div class="home">
@@ -42,33 +42,34 @@
 								<li><a href="#">Accessories</a></li>
 							</ul>
 						</div> --}}
-				
-				
+
+
 						<div class="sidebar_section">
 							<div class="sidebar_subtitle brands_subtitle">Brands</div>
 							<ul class="brands_list">
 								@foreach($brands as $row)
-								   @php 
+								   @php
 								    $brand=DB::table('brands')->where('id',$row->brand_id)->first();
 								   @endphp
+                                @if($brand && $brand->brand_name)
 								<li class="brand"><a href="#">{{ $brand->brand_name}}</a></li>
+                                @endif
 								@endforeach
 							</ul>
 						</div>
 					</div>
-
 				</div>
 
 				<div class="col-lg-9">
-					
+
 					<!-- Shop Content -->
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
 							<div class="shop_product_count">Category By item </div>
 							<div class="shop_sorting">
-								
-						
+
+
 							</div>
 						</div>
 
@@ -92,7 +93,7 @@
 
 									<div class="product_name"><div><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name }}</a></div></div>
 								</div>
-						
+
 
 								<ul class="product_marks">
 									 @if($pro->discount_price == NULL)
@@ -101,9 +102,9 @@
 									        @php
 									        $amount=$pro->selling_price - $pro->discount_price;
 									        $discount=$amount/$pro->selling_price * 100;
-									        @endphp 
+									        @endphp
 									         <li class="product_mark product_new" style="background: red;">
-									       
+
 									       {{ intval($discount) }}%
 									        </li>
 									@endif
@@ -131,12 +132,12 @@
 		</div>
 	</div>
 
-	
-	
-	
 
-	
-	
+
+
+
+
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="{{ asset('public/frontend/plugins/parallax-js-master/parallax.min.js') }}"></script>

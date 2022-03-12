@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class ProductController extends Controller
@@ -69,22 +70,22 @@ class ProductController extends Controller
 
             $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
                 Image::make($image_two)->resize(230,300)->save('public/media/product/'.$image_two_name);
-                $data['image_two']='public/media/product/'.$image_two_name; 
+                $data['image_two']='public/media/product/'.$image_two_name;
 
             $image_three_name= hexdec(uniqid()).'.'.$image_three->getClientOriginalExtension();
                 Image::make($image_three)->resize(230,300)->save('public/media/product/'.$image_three_name);
-                $data['image_three']='public/media/product/'.$image_three_name; 
-                
+                $data['image_three']='public/media/product/'.$image_three_name;
+
                 $product=DB::table('products')
                           ->insert($data);
                     $notification=array(
                      'messege'=>'Successfully Product Inserted ',
                      'alert-type'=>'success'
                     );
-                return Redirect()->back()->with($notification);   
+                return Redirect()->back()->with($notification);
         }
-   
-     
+
+
     }
     public function Inactive($id)
     {
@@ -93,7 +94,7 @@ class ProductController extends Controller
             'messege'=>'Successfully Product Inactive ',
             'alert-type'=>'success'
            );
-       return Redirect()->back()->with($notification);  
+       return Redirect()->back()->with($notification);
     }
 
     public function Active($id)
@@ -103,7 +104,7 @@ class ProductController extends Controller
             'messege'=>'Successfully Product Active ',
             'alert-type'=>'success'
            );
-       return Redirect()->back()->with($notification);  
+       return Redirect()->back()->with($notification);
     }
     public function DeleteProduct($id)
     {
@@ -111,16 +112,13 @@ class ProductController extends Controller
         $image1=$product->image_one;
         $image2=$product->image_two;
         $image3=$product->image_three;
-
-        unlink($image1);
-        unlink($image2);
-        unlink($image3);
+        File::delete([$image1,$image2,$image3]);
         DB::table('products')->where('id',$id)->delete();
         $notification=array(
             'messege'=>'Successfully Product Deleted ',
             'alert-type'=>'success'
            );
-       return Redirect()->back()->with($notification);  
+       return Redirect()->back()->with($notification);
     }
     public function ViewProduct($id)
     {
@@ -133,11 +131,11 @@ class ProductController extends Controller
         ->first();
         return view('admin.product.show',compact('product'));
 
-      
+
     }
     public function EditProduct($id)
     {
-        
+
         $product=DB::table('products')->where('id',$id)->first();
 
         return view('admin.product.edit',compact('product'));
@@ -165,7 +163,7 @@ class ProductController extends Controller
         $data['mid_slider']=$request->mid_slider;
         $data['hot_new']=$request->hot_new;
         $data['buyone_getone']=$request->buyone_getone;
-        
+
         $update=DB::table('products')->where('id',$id)->update($data);
         if ($update) {
              $notification=array(
@@ -194,7 +192,7 @@ class ProductController extends Controller
 
         $data=array();
         if($request->has('image_one')){
-            unlink($old_one);
+            File::delete([$old_one]);
             $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
             Image::make($image_one)->resize(300,300)->save('public/media/product/'.$image_one_name);
             $data['image_one']='public/media/product/'.$image_one_name;
@@ -207,7 +205,7 @@ class ProductController extends Controller
 
         }
         if($request->has('image_two')){
-            unlink($old_two);
+            File::delete([$old_two]);
             $image_two_name= hexdec(uniqid()).'.'.$image_two->getClientOriginalExtension();
             Image::make($image_two)->resize(300,300)->save('public/media/product/'.$image_two_name);
             $data['image_two']='public/media/product/'.$image_two_name;
@@ -220,7 +218,7 @@ class ProductController extends Controller
 
         }
         if($request->has('image_three')){
-            unlink($old_one);
+            File::delete([$old_one]);
             $image_three_name= hexdec(uniqid()).'.'.$image_three->getClientOriginalExtension();
             Image::make($image_three)->resize(300,300)->save('public/media/product/'.$image_three_name);
             $data['image_three']='public/media/product/'.$image_three_name;
@@ -232,9 +230,9 @@ class ProductController extends Controller
               return Redirect()->route('all.product')->with($notification);
 
         }if($request->has('image_one') && $request->has('image_two')){
-            unlink($old_one);
-            unlink($old_two);
-            $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
+
+            File::delete([$old_one,$old_two]);
+        $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
             Image::make($image_one)->resize(300,300)->save('public/media/product/'.$image_one_name);
             $data['image_one']='public/media/product/'.$image_one_name;
 
@@ -247,12 +245,10 @@ class ProductController extends Controller
                 'messege'=>'Image One and Two Updated ',
                 'alert-type'=>'success'
                );
-               
+
         return Redirect()->route('all.product')->with($notification);
         } if($request->has('image_one') && $request->has('image_two') && $request->has('image_three')){
-            unlink($old_one);
-            unlink($old_two);
-            unlink($old_three);
+            File::delete([$old_one,$old_two,$old_three]);
             $image_one_name= hexdec(uniqid()).'.'.$image_one->getClientOriginalExtension();
             Image::make($image_one)->resize(300,300)->save('public/media/product/'.$image_one_name);
             $data['image_one']='public/media/product/'.$image_one_name;

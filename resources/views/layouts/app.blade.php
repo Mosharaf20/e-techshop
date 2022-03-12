@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>E-shop</title>
+<title>E-techshop</title>
 <meta name="csrf" value="{{ csrf_token() }}">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/main_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/responsive.css') }}">
  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
- 
+
  <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend/styles/contact_responsive.css')}}">
  <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="sweetalert2.min.css">
@@ -35,9 +35,9 @@
 <body>
 
 <div class="super_container">
-    
+
     <!-- Header -->
-    
+
     <header class="header">
 
         <!-- Top Bar -->
@@ -51,21 +51,21 @@
                         <div class="top_bar_content ml-auto">
                             <div class="top_bar_menu">
                                 <ul class="standard_dropdown ">
-                                  
+
                                     <li>
                                        <a href="#" data-toggle="modal" data-target="#exampleModal">My Order Traking</a>
-                                        
+
                                     </li>
-                             
+
                                 </ul>
                             </div>&nbsp;&nbsp;&nbsp;
 
-                          
+
 
 
                             <div class="top_bar_menu">
                                 <ul class="standard_dropdown ">
-                                    @php 
+                                    @php
                                         $language=session()->get('lang');
                                     @endphp
                                     <li>
@@ -74,21 +74,21 @@
                                         @else
                                          <a href="{{ route('language.bangla') }}">Bangla<i class="fas fa-chevron-down"></i></a>
                                          @endif
-                                        
+
                                     </li>
-                             
+
                                 </ul>
                             </div>
                             <div class="top_bar_user">
-                                
+
                                 @guest
                                 <div><a href="{{ route('login') }}">
                                     @if(session()->get('lang') == 'bangla')
-                                    রেজিস্টার / লগইন 
+                                    রেজিস্টার / লগইন
                                     @else
                                      Register/Login
                                     @endif
-                                 
+
                               </a></div>
                                 @else
                                 <ul class="standard_dropdown top_bar_dropdown">
@@ -98,19 +98,19 @@
                                         <ul>
                                             <li><a href="{{ route('user.wishlist') }}">Wishlist</a></li>
                                             <li><a href="{{ route('user.checkout') }}">Checkout</a></li>
-                                            
+
                                         </ul>
                                     </li>
-                           
+
                                 </ul>
                                 @endguest
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>      
+            </div>
         </div>
 
         <!-- Header Main -->
@@ -126,14 +126,14 @@
                                   @if(session()->get('lang') == 'bangla')
                                      এল এইচ স্টোর
                                      @else
-                                     <img src="{{ asset('public/frontend/images/logo.png') }}" style="width:250px; height:180px;" >
+                                     <img src="{{ asset('public/frontend/images/logo.png') }}" >
                                       <!-- {{ $setting->company_name }} -->
                                      @endif
-                          
+
                         </a></div>
                         </div>
                     </div>
-                    @php  
+                    @php
                       $category=DB::table('categories')->get();
                     @endphp
                     <!-- Search -->
@@ -168,7 +168,7 @@
                         <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
                             @guest
                             @else
-                            @php 
+                            @php
                             $wishlist=DB::table('wishlists')->where('user_id',Auth::id())->get();
                             @endphp
                             <div class="wishlist d-flex flex-row align-items-center justify-content-end">
@@ -181,7 +181,7 @@
                             @endguest
 
                             <!-- Cart -->
-                            @php  
+                            @php
                                 $setting=DB::table('settings')->first();
                                 $charge=$setting->shipping_charge;
 
@@ -234,37 +234,37 @@
                         </div>
                         <div class="footer_social">
                             <ul>
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-google"></i></a></li>
-                                <li><a href="#"><i class="fab fa-vimeo-v"></i></a></li>
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google"></i></a></li>
+                                <li><a href="#"><i class="fa fa-vimeo-v"></i></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                
+
 
                 <div class="col-lg-2 offset-lg-2">
 
                     <div class="footer_column">
                         <div class="footer_title">Find it Fast</div>
-                      
-                           
+
+
                         @foreach ($category as $row)
                         <ul class="footer_list">
-                            
-                            <li><a href=""><h2>{{$row->category_name}}</h2></a></li>
-                          
+
+                            <li><a href=""><h4>{{$row->category_name}}</h4></a></li>
+
                         </ul>
                         @endforeach
-                      
+
                     </div>
                 </div>
 
-        
 
-             
+
+
 
             </div>
         </div>
@@ -276,7 +276,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    
+
                     <div class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
                         <div class="copyright_content"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with Prime University Batch 46(E)
@@ -315,7 +315,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                                               <label>Status Code</label>
                                                <input type="text" name="code" required="" class="form-control" placeholder="Your Order Status Code">
                                          </div><br>
-                                         <button class="btn btn-danger" type="submit">Track Now</button>                 
+                                         <button class="btn btn-danger" type="submit">Track Now</button>
                                      </form>
                                   </div>
                                 </div>
@@ -361,9 +361,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                   break;
           }
         @endif
-     </script> 
+     </script>
 
-      <script>  
+      <script>
          $(document).on("click", "#return", function(e){
              e.preventDefault();
              var link = $(this).attr("href");
