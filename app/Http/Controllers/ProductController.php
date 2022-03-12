@@ -14,14 +14,18 @@ class ProductController extends Controller
     	->join('categories','products.category_id','categories.id')
     	->join('subcategories','products.subcategory_id','subcategories.id')
     	->join('brands','products.brand_id','brands.id')
-    	->select('products.*','categories.category_name','subcategories.subcategory_name','brands.brand_name')->where('products.id',$id)->first();
-			$color=$product->product_color;
-			$product_color=explode(',',$color);
+    	->select('products.*','categories.category_name','subcategories.subcategory_name','brands.brand_name')
+        ->where('products.id',$id)->first();
+        if(!$product)
+            abort(404);
 
-			$size=$product->product_size;
-			$product_size=explode(',',$size);
+        $color=$product->product_color ?? '';
+        $product_color=explode(',',$color);
 
-			
+        $size=$product->product_size ?? '';
+        $product_size=explode(',',$size);
+
+
 
         return  view('pages.product_details',compact('product','product_color', 'product_size'));
    }
@@ -34,7 +38,7 @@ class ProductController extends Controller
 						 $data['id']=$id;
 					   $data['name']=$product->product_name;
 					   $data['qty']=$request->qty;
-					   $data['price']= $product->selling_price;          
+					   $data['price']= $product->selling_price;
 						$data['weight']=1;
 					   $data['options']['image']=$product->image_one;
 					   $data['options']['color']=$request->color;
@@ -49,12 +53,12 @@ class ProductController extends Controller
 						$data['id']=$id;
 					   $data['name']=$product->product_name;
 					   $data['qty']=$request->qty;
-					   $data['price']= $product->discount_price;          
+					   $data['price']= $product->discount_price;
 						$data['weight']=1;
 					   $data['options']['image']=$product->image_one;
 					   $data['options']['color']=$request->color;
 					   $data['options']['size']=$request->size;
-					   Cart::add($data);  
+					   Cart::add($data);
 					   $notification=array(
 							 'messege'=>'Successfully Added',
 							'alert-type'=>'success'
@@ -66,7 +70,7 @@ class ProductController extends Controller
    {
 	$products=DB::table('products')->where('subcategory_id',$id)->paginate(30);
 	$brands= DB::table('products')->where('subcategory_id',$id)->select('brand_id')->groupBy('brand_id')->get();
-	
+
 	return view('pages.all_products',compact('products','brands'));
    }
 }

@@ -2,8 +2,8 @@
 @section('content')
 @include('layouts.menubar')
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-@php 
- $featured=DB::table('products')->where('status',1)->orderBy('id','desc')->limit(24)->get(); 
+@php
+ $featured=DB::table('products')->where('status',1)->orderBy('id','desc')->limit(24)->get();
  $trend=DB::table('products')->where('status',1)->where('trend',1)->orderBy('id','desc')->limit(24)->get();
 
  $hot=DB::table('products')->join('brands','products.brand_id','brands.id')->select('brands.brand_name','products.*')->where('products.status',1)->where('hot_deal',1)->orderBy('id','desc')->limit(4)->get();
@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <!-- Char. Item -->
-                <div class="col-lg-3 col-md-6 char_col">              
+                <div class="col-lg-3 col-md-6 char_col">
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
                         <div class="char_icon"><img src="{{ asset('public/frontend/images/char_1.png')}}" alt=""></div>
                         <div class="char_content">
@@ -25,7 +25,7 @@
 
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
-                    
+
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
                         <div class="char_icon"><img src="{{ asset('public/frontend/images/char_2.png')}}" alt=""></div>
                         <div class="char_content">
@@ -37,7 +37,7 @@
 
                 <!-- Char. Item -->
                 <div class="col-lg-3 col-md-6 char_col">
-                    
+
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
                         <div class="char_icon"><img src="{{ asset('public/frontend/images/char_3.png')}}" alt=""></div>
                         <div class="char_content">
@@ -48,7 +48,7 @@
                 </div>
 
                 <!-- Char. Item -->
-                <div class="col-lg-3 col-md-6 char_col">                
+                <div class="col-lg-3 col-md-6 char_col">
                     <div class="char_item d-flex flex-row align-items-center justify-content-start">
                         <div class="char_icon"><img src="{{ asset('public/frontend/images/char_4.png')}}" alt=""></div>
                         <div class="char_content">
@@ -67,13 +67,13 @@
         <div class="container">
             <div class="row">
             <div class="col d-flex flex-lg-row flex-column align-items-center justify-content-start">
-                    
+
                     <!-- Deals -->
 
                     <div class="deals">
                         <div class="deals_title">Deals of the Week</div>
                         <div class="deals_slider_container">
-                            
+
                             <!-- Deals Slider -->
                             <div class="owl-carousel owl-theme deals_slider">
                             @foreach($hot as $ht)
@@ -87,7 +87,7 @@
                                             @else
                                             <div class="deals_item_price_a ml-auto">${{ $ht->selling_price }}</div>
                                             @endif
-                                            
+
                                         </div>
                                         <div class="deals_info_line d-flex flex-row justify-content-start">
                                             <div class="deals_item_name"><a href="{{ url('product/details/'.$ht->id.'/'.$ht->product_name) }}">
@@ -101,7 +101,7 @@
                                               <div class="deals_item_price ml-auto">$ {{ $ht->discount_price }}</div>
                                             @else
                                             @endif
-                                            
+
                                         </div>
                                         {{-- <div class="available">
                                             <div class="available_line d-flex flex-row justify-content-start">
@@ -110,22 +110,22 @@
                                             </div>
                                             <div class="available_bar"><span style="width:17%"></span></div>
                                         </div> --}}
-                                   
+
                                     </div>
                                 </div>
-                               @endforeach 
-    
+                               @endforeach
+
 
                             </div>
 
                         </div>
 
                         <div class="deals_slider_nav_container">
-                            <div class="deals_slider_prev deals_slider_nav"><i class="fas fa-chevron-left ml-auto"></i></div>
-                            <div class="deals_slider_next deals_slider_nav"><i class="fas fa-chevron-right ml-auto"></i></div>
+                            <div class="deals_slider_prev deals_slider_nav"><i class="fa fa-chevron-left ml-auto"></i></div>
+                            <div class="deals_slider_next deals_slider_nav"><i class="fa fa-chevron-right ml-auto"></i></div>
                         </div>
                     </div>
-                    
+
                  <!-- Featured -->
                  <div class="featured">
                         <div class="tabbed_container">
@@ -139,7 +139,7 @@
                             <!-- Product Panel -->
                             <div class="product_panel panel active" >
                                 <div class="featured_slider slider">
-                                   @foreach($featured as $row) 
+                                   @foreach($featured as $row)
                                     <!-- Slider Item -->
                                     <div class="featured_slider_item">
                                         <div class="border_active"></div>
@@ -164,17 +164,17 @@
 
                                                   <div class="product_extras">
                                                     <button id="{{ $row->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal"  onclick="productview(this.id)">Add to Cart</button>
-                                                 
+
                                                 </div>
 
 
 
 
                                             </div>
-                                             <button  
-                                               class="addwishlist" data-id="{{ $row->id }}"> 
+                                             <button
+                                               class="addwishlist" data-id="{{ $row->id }}">
                                                <div class="product_fav">
-                                                  <i class="fa fa-heart text-info"></i>  
+                                                  <i class="fa fa-heart text-info"></i>
                                                </div>
                                             </button>
                                             <ul class="product_marks">
@@ -185,14 +185,14 @@
                                                 @php
                                                 $amount=$row->selling_price - $row->discount_price;
                                                 $discount=$amount/$row->selling_price * 100;
-                                                @endphp 
+                                                @endphp
                                                  <li class="product_mark product_discount">
-                                               
+
                                                {{ intval($discount) }}%
                                                 </li>
                                                  @endif
-                                                
-                                               
+
+
                                             </ul>
                                         </div>
                                     </div>
@@ -223,8 +223,8 @@
                     <div class="popular_categories_content">
                         <div class="popular_categories_title">Popular Categories</div>
                         <div class="popular_categories_slider_nav">
-                            <div class="popular_categories_prev popular_categories_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                            <div class="popular_categories_next popular_categories_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                            <div class="popular_categories_prev popular_categories_nav"><i class="fa fa-angle-left ml-auto"></i></div>
+                            <div class="popular_categories_next popular_categories_nav"><i class="fa fa-angle-right ml-auto"></i></div>
                         </div>
                         <div class="popular_categories_link"><a href="#">full catalog</a></div>
                     </div>
@@ -232,7 +232,7 @@
                 <div class="col-lg-9">
                     <div class="popular_categories_slider_container">
                         <div class="owl-carousel owl-theme popular_categories_slider">
-                           @foreach($category as $row) 
+                           @foreach($category as $row)
                             <!-- Popular Categories Item -->
                             <div class="owl-item">
                                 <div class="popular_category d-flex flex-column align-items-center justify-content-center">
@@ -240,7 +240,7 @@
                                     <div class="popular_category_text">{{ $row->category_name }}</div>
                                 </div>
                             </div>
-                           @endforeach 
+                           @endforeach
                         </div>
                     </div>
                 </div>
@@ -249,7 +249,7 @@
     </div>
 
     <!-- Banner -->
-@php 
+@php
     $mid=DB::table('products')->join('categories','products.category_id','categories.id')
         ->join('brands','products.brand_id','brands.id')->select('products.*','brands.brand_name','categories.category_name')->where('products.mid_slider',1)->orderBy('id','DESC')->limit(4)->get();
 @endphp
@@ -259,7 +259,7 @@
             <div class="banner_2_dots"></div>
             <!-- Banner 2 Slider -->
         <div class="owl-carousel owl-theme banner_2_slider">
-            @foreach($mid as $row) 
+            @foreach($mid as $row)
                 <!-- Banner 2 Slider Item -->
                 <div class="owl-item">
                     <div class="banner_2_item">
@@ -273,7 +273,7 @@
                                         <div class="rating_r rating_r_4 banner_2_rating"><i></i><i></i><i></i><i></i><i></i></div>
                                         <div class="button banner_2_button"><a href="#">Explore</a></div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-lg-8 col-md-6 fill_height">
                                     <div class="banner_2_image_container">
@@ -281,11 +281,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>          
+                        </div>
                     </div>
                 </div>
-             @endforeach   
-            
+             @endforeach
+
 
             </div>
         </div>
@@ -302,7 +302,7 @@
                             <div class="new_arrivals_title">New Trend</div>
                             <ul class="clearfix">
                                 <li class="active"></li>
-                              
+
                             </ul>
                             <div class="tabs_line"><span></span></div>
                         </div>
@@ -330,13 +330,13 @@
                                                     </a></div></div>
                                                     <div class="product_extras">
                                                         <button id="{{ $row->id }}" class="product_cart_button addcart" data-toggle="modal" data-target="#cartmodal"  onclick="productview(this.id)">Add to Cart</button>
-                                                     
+
                                                     </div>
                                             </div>
-                                             <button  
-                                               class="addwishlist" data-id="{{ $row->id }}"> 
+                                             <button
+                                               class="addwishlist" data-id="{{ $row->id }}">
                                                <div class="product_fav">
-                                                  <i class="fa fa-heart text-info"></i>  
+                                                  <i class="fa fa-heart text-info"></i>
                                                </div>
                                             </button>
                                             <ul class="product_marks">
@@ -347,14 +347,14 @@
                                                 @php
                                                 $amount=$row->selling_price - $row->discount_price;
                                                 $discount=$amount/$row->selling_price * 100;
-                                                @endphp 
+                                                @endphp
                                                  <li class="product_mark product_discount">
-                                               
+
                                                {{ intval($discount) }}%
                                                 </li>
                                                  @endif
-                                                
-                                               
+
+
                                             </ul>
                                         </div>
                                     </div>
@@ -362,17 +362,17 @@
                                     </div>
                                     <div class="arrivals_slider_dots_cover"></div>
                                 </div>
-                            </div> 
+                            </div>
                         </div>
-                                
+
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
 
 <!--first category--->
-@php 
+@php
 $cats=DB::table('categories')->skip(1)->first();
 $category_id=$cats->id;
 $products=DB::table('products')->where('category_id',$category_id)->where('status',1)->limit(16)->orderBy('id','DESC')->get();
@@ -387,7 +387,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                             <div class="new_arrivals_title">{{ $cats->category_name }}</div>
                             <ul class="clearfix">
                                 <li class="active"></li>
-                              
+
                             </ul>
                             <div class="tabs_line"><span></span></div>
                         </div>
@@ -416,10 +416,10 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                                                     <button class="product_cart_button">Add to Cart</button>
                                                 </div>
                                             </div>
-                                             <button  
-                                               class="addwishlist" data-id="{{ $row->id }}"> 
+                                             <button
+                                               class="addwishlist" data-id="{{ $row->id }}">
                                                <div class="product_fav">
-                                                  <i class="fa fa-heart text-info"></i>  
+                                                  <i class="fa fa-heart text-info"></i>
                                                </div>
                                             </button>
                                             <ul class="product_marks">
@@ -430,30 +430,30 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                                                 @php
                                                 $amount=$row->selling_price - $row->discount_price;
                                                 $discount=$amount/$row->selling_price * 100;
-                                                @endphp 
+                                                @endphp
                                                  <li class="product_mark product_discount">
-                                               
+
                                                {{ intval($discount) }}%
                                                 </li>
                                                  @endif
-                                                
-                                               
+
+
                                             </ul>
                                         </div>
                                     </div>
                                         @endforeach
                                     </div>
                                     <div class="arrivals_slider_dots_cover"></div>
-                                </div>                  
+                                </div>
 
                             </div>
 
                         </div>
-                                
+
                     </div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
 
     <!-- Adverts -->
@@ -463,7 +463,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
             <div class="row">
 
                 <div class="col-lg-4 advert_col">
-                    
+
                     <!-- Advert Item -->
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
@@ -476,7 +476,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                 </div>
 
                 <div class="col-lg-4 advert_col">
-                    
+
                     <!-- Advert Item -->
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
@@ -490,7 +490,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                 </div>
 
                 <div class="col-lg-4 advert_col">
-                    
+
                     <!-- Advert Item -->
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
@@ -520,8 +520,8 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                         <h2 class="trends_title">Buy One Get One</h2>
                         <div class="trends_text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</p></div>
                         <div class="trends_slider_nav">
-                            <div class="trends_prev trends_nav"><i class="fas fa-angle-left ml-auto"></i></div>
-                            <div class="trends_next trends_nav"><i class="fas fa-angle-right ml-auto"></i></div>
+                            <div class="trends_prev trends_nav"><i class="fa fa-angle-left ml-auto"></i></div>
+                            <div class="trends_next trends_nav"><i class="fa fa-angle-right ml-auto"></i></div>
                         </div>
                     </div>
                 </div>
@@ -541,7 +541,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                                 <div class="trends_item is_new">
                                     <div class="trends_image d-flex flex-column align-items-center justify-content-center"><img src="{{ asset($row->image_one) }}" style="height: 220px;"></div>
                                     <div class="trends_content">
-                                       
+
                                         <div class="trends_info clearfix">
                                             <div class="trends_name"><a href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}">
                                                 {{ $row->product_name }}
@@ -554,7 +554,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                                             @endif
                                             <a  class="btn btn-danger btn-sm pull-right" href="{{ url('product/details/'.$row->id.'/'.$row->product_name) }}">add to cart</a>
 
-                                         
+
                                         </div>
 
                                     </div>
@@ -566,30 +566,30 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                                                 @php
                                                 $amount=$row->selling_price - $row->discount_price;
                                                 $discount=$amount/$row->selling_price * 100;
-                                                @endphp 
+                                                @endphp
                                                  <li class="product_mark product_discount">
-                                               
+
                                                {{ intval($discount) }}%
                                                 </li>
                                         @endif
 
                                         <li class="trends_mark trends_new">Extra One</li>
                                     </ul>
-                                 {{--    <button  
-                                               class="addwishlist" data-id="{{ $row->id }}"> 
+                                 {{--    <button
+                                               class="addwishlist" data-id="{{ $row->id }}">
                                                <div class="product_fav">
-                                                  <i class="fa fa-heart text-info"></i>  
+                                                  <i class="fa fa-heart text-info"></i>
                                                </div>
                                             </button> --}}
-                                     <button  class="addwishlist" data-id="{{ $row->id }}">      
+                                     <button  class="addwishlist" data-id="{{ $row->id }}">
                                        <div class="trends_fav"><i class="fa fa-heart text-danger"></i></div>
-                                    </button> 
+                                    </button>
                                 </div>
                             </div>
-                           @endforeach 
-                            
+                           @endforeach
 
-                         
+
+
 
                         </div>
                     </div>
@@ -605,17 +605,17 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
         <div class="container">
             <div class="row">
                 <div class="col">
-                    
+
                     <div class="reviews_title_container">
                         <h3 class="reviews_title">Latest Reviews</h3>
                         <div class="reviews_all ml-auto"><a href="#">view all <span>reviews</span></a></div>
                     </div>
 
                     <div class="reviews_slider_container">
-                        
+
                         <!-- Reviews Slider -->
                         <div class="owl-carousel owl-theme reviews_slider">
-                            
+
                             <!-- Reviews Slider Item -->
                             <div class="owl-item">
                                 <div class="review d-flex flex-row align-items-start justify-content-start">
@@ -722,11 +722,11 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
             <div class="row">
                 <div class="col">
                     <div class="brands_slider_container">
-                        
+
                         <!-- Brands Slider -->
 
                         <div class="owl-carousel owl-theme brands_slider">
-                            
+
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
@@ -737,10 +737,10 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                             <div class="owl-item"><div class="brands_item d-flex flex-column justify-content-center"><img src="{{ asset('public/frontend/images/brands_1.jpg') }}" alt=""></div></div>
 
                         </div>
-                        
+
                         <!-- Brands Slider Navigation -->
-                        <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
+                        <div class="brands_nav brands_prev"><i class="fa fa-chevron-left"></i></div>
+                        <div class="brands_nav brands_next"><i class="fa fa-chevron-right"></i></div>
 
                     </div>
                 </div>
@@ -792,7 +792,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
               <div class="card" style="width: 16rem;">
               <img src="" class="card-img-top" id="pimage" style="height: 240px;">
               <div class="card-body">
-               
+
               </div>
             </div>
           </div>
@@ -828,7 +828,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
               </form>
            </div>
          </div>
-      </div>  
+      </div>
     </div>
   </div>
 </div>
@@ -854,10 +854,10 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                          $.each(data.size, function(key, value){
                              $('select[name="size"]').append('<option value="'+ value +'">' + value + '</option>');
                               if (data.size == "") {
-                                     $('#sizediv').hide();   
+                                     $('#sizediv').hide();
                               }else{
                                     $('#sizediv').show();
-                              } 
+                              }
                          });
 
                         var d =$('select[name="color"]').empty();
@@ -878,7 +878,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
 
 <script type="text/javascript">
       $(document).ready(function() {
-            $('.addwishlist').on('click', function(){  
+            $('.addwishlist').on('click', function(){
               var id = $(this).data('id');
               if(id) {
                  $.ajax({
@@ -906,7 +906,7 @@ $products=DB::table('products')->where('category_id',$category_id)->where('statu
                        }
 
                      },
-                    
+
                  });
              } else {
                  alert('danger');

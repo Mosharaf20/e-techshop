@@ -8,7 +8,7 @@
 
 <div class="super_container">
 
-	
+
 	<!-- Home -->
 
 	<div class="home">
@@ -39,8 +39,8 @@
 								<li><a href="#">Accessories</a></li>
 							</ul>
 						</div> --}}
-					
-				
+
+
 						<div class="sidebar_section">
 							<div class="sidebar_subtitle brands_subtitle">Brands</div>
 							<ul class="brands_list">
@@ -54,13 +54,13 @@
 				</div>
 
 				<div class="col-lg-9">
-					
+
 					<!-- Shop Content -->
 
 					<div class="shop_content">
 						<div class="shop_bar clearfix">
 							<div class="shop_product_count"><span></span> Search Show</div>
-					
+
 						</div>
 
 						<div class="product_grid row">
@@ -83,7 +83,7 @@
 
 									<div class="product_name"><div><a href="{{ url('product/details/'.$pro->id.'/'.$pro->product_name) }}" tabindex="0">{{ $pro->product_name }}</a></div></div>
 								</div>
-						
+
 
 								<ul class="product_marks">
 									 @if($pro->discount_price == NULL)
@@ -92,9 +92,9 @@
 									        @php
 									        $amount=$pro->selling_price - $pro->discount_price;
 									        $discount=$amount/$pro->selling_price * 100;
-									        @endphp 
+									        @endphp
 									         <li class="product_mark product_new" style="background: red;">
-									       
+
 									       {{ intval($discount) }}%
 									        </li>
 									@endif
@@ -108,13 +108,13 @@
 						</div>
 
 						<!-- Shop Page Navigation -->
-{{-- 
+{{--
 						<div class="shop_page_nav d-flex flex-row">
 							<div class="page_prev d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-left"></i></div>
 							 {{   $products->links() }}
 							<div class="page_next d-flex flex-column align-items-center justify-content-center"><i class="fas fa-chevron-right"></i></div>
 						</div> --}}
-
+                        page_prev d-flex flex-column align-items-center justify-content-center
 					</div>
 
 				</div>
@@ -122,7 +122,7 @@
 		</div>
 	</div>
 
-	
+
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="{{ asset('public/frontend/plugins/parallax-js-master/parallax.min.js') }}"></script>

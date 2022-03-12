@@ -70,9 +70,9 @@
                                     @endphp
                                     <li>
                                         @if(session()->get('lang') == 'bangla')
-                                        <a href="{{ route('language.english') }}">English<i class="fas fa-chevron-down"></i></a>
+                                        <a href="{{ route('language.english') }}">English<i class="fa fa-chevron-down"></i></a>
                                         @else
-                                         <a href="{{ route('language.bangla') }}">Bangla<i class="fas fa-chevron-down"></i></a>
+                                         <a href="{{ route('language.bangla') }}">Bangla<i class="fa fa-chevron-down"></i></a>
                                          @endif
 
                                     </li>
@@ -94,7 +94,7 @@
                                 <ul class="standard_dropdown top_bar_dropdown">
                                     <li>
                                         <a href="{{ route('home') }}"><div class="user_icon"><img src="{{ asset('public/frontend/images/user.svg') }}" alt=""></div>
-                                            Profile<i class="fas fa-chevron-down"></i></a>
+                                            Profile<i class="fa fa-chevron-down"></i></a>
                                         <ul>
                                             <li><a href="{{ route('user.wishlist') }}">Wishlist</a></li>
                                             <li><a href="{{ route('user.checkout') }}">Checkout</a></li>
@@ -147,7 +147,7 @@
                                         <div class="custom_dropdown">
                                             <div class="custom_dropdown_list">
                                                 <span class="custom_dropdown_placeholder clc">All Categories</span>
-                                                <i class="fas fa-chevron-down"></i>
+                                                <i class="fa fa-chevron-down"></i>
                                                 <ul class="custom_list clc">
                                                     <li><a class="clc" href="#">All Categories</a></li>
                                                     @foreach($category as $row)

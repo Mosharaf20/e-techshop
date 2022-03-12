@@ -7,9 +7,13 @@
 				<!-- Images -->
 				<div class="col-lg-2 order-lg-1 order-2">
 					<ul class="image_list">
+                        @if($product)
 						<li data-image="{{ asset($product->image_one) }}"><img src="{{ asset($product->image_one) }}" alt=""></li>
+
 						<li data-image="{{ asset($product->image_two) }}"><img src="{{ asset($product->image_two) }}" alt=""></li>
-						<li data-image="{{ asset($product->image_three) }}"><img src="{{ asset($product->image_three) }}" alt=""></li>
+
+                        <li data-image="{{ asset($product->image_three) }}"><img src="{{ asset($product->image_three) }}" alt=""></li>
+                        @endif
 					</ul>
 				</div>
 
@@ -26,7 +30,7 @@
 						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
 						<div class="product_text"><p></p></div>
 						<div class="order_info d-flex flex-row">
-		
+
 							<form action="{{ url('cart/product/add/'.$product->id) }}" method="post">
 								@csrf
 								<div class="row">
@@ -64,23 +68,23 @@
 								</div>
 
 								 @if($product->discount_price == NULL)
-                                              <div class="product_price"> Price : $ {{ $product->selling_price }}</div>
-                                            @else
-                                            @endif
-                                            @if($product->discount_price != NULL)
-                                              <div class="product_price">Price: $ {{ $product->discount_price }}</div>
-                                            @else
-                                            @endif
+                                  <div class="product_price"> Price : $ {{ $product->selling_price }}</div>
+                                 @else
+                                 @endif
+                                 @if($product->discount_price != NULL)
+                                  <div class="product_price">Price: $ {{ $product->discount_price }}</div>
+                                 @else
+                                 @endif
 
-						
+
 
 								<div class="button_container">
 									<button type="submit" class="button cart_button">Add to Cart</button>
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
+									<div class="product_fav"><i class="fa fa-heart"></i></div>
 								</div><br>
-								
+
 								<div class="sharethis-inline-share-buttons"></div>
-								
+
 							</form>
 						</div>
 					</div>
@@ -99,12 +103,12 @@
 					<div class="viewed_title_container">
 						<h3 class="viewed_title">Product Details</h3>
 						<div class="viewed_nav_container">
-							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
-							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
+							<div class="viewed_nav viewed_prev"><i class="fa fa-chevron-left"></i></div>
+							<div class="viewed_nav viewed_next"><i class="fa fa-chevron-right"></i></div>
 						</div>
 					</div>
 
-					<div class="">						
+					<div class="">
 							<ul class="nav nav-tabs" id="myTab" role="tablist">
 							  <li class="nav-item">
 							    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Product Details</a>
