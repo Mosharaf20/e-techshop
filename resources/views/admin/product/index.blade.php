@@ -9,7 +9,7 @@
 
         <div class="card pd-20 pd-sm-40">
           <h6 class="card-body-title">Product List
-          	<a href="#" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">Add New</a>
+          	<a href="{{route('add.product')}}" class="btn btn-sm btn-warning" style="float: right;" data-toggle="modal" data-target="#modaldemo3">Add New</a>
           </h6>
           <br>
           <div class="table-wrapper">
@@ -50,9 +50,9 @@
                   	@else
                   		<a href="{{ URL::to('active/product/'.$row->id) }}" class="btn btn-sm btn-success" title="Active"><i class="fa fa-thumbs-up"></i></a>
                   	@endif
-                  	
+
                   </td>
-                 
+
                 </tr>
                 @endforeach
               </tbody>

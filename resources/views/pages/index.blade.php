@@ -375,8 +375,12 @@
 @php
 $cats=DB::table('categories')->skip(1)->first();
 $category_id=$cats->id;
-$products=DB::table('products')->where('category_id',$category_id)->where('status',1)->limit(16)->orderBy('id','DESC')->get();
-
+$products=DB::table('products')
+->where('category_id',$category_id)
+->where('status',1)
+->limit(16)
+->orderBy('id','DESC')
+->get();
 @endphp
     <div class="new_arrivals">
         <div class="container">
