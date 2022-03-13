@@ -108,7 +108,8 @@ class ProductController extends Controller
     }
     public function DeleteProduct($id)
     {
-        DB::table('products')->where('id',$id)->first();
+        $product = DB::table('products')->where('id',$id)->first();
+        if(!$product) abort(404);
         $image1=$product->image_one;
         $image2=$product->image_two;
         $image3=$product->image_three;
