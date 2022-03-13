@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\File;
 use Image;
 
 class PostController extends Controller
@@ -46,7 +47,7 @@ class PostController extends Controller
                      'messege'=>'Successfully Post Inserted ',
                      'alert-type'=>'success'
                     );
-                return Redirect()->back()->with($notification);	
+                return Redirect()->back()->with($notification);
     	}
     }
     public function index()
@@ -61,15 +62,15 @@ class PostController extends Controller
     {
         $post=DB::table('posts')->where('id',$id)->first();
         $image=$post->post_image;
-      
-        unlink($image);
-    
+
+        File::delete($image);
+
         DB::table('posts')->where('id',$id)->delete();
         $notification=array(
             'messege'=>'Successfully post Deleted ',
             'alert-type'=>'success'
            );
-       return Redirect()->back()->with($notification);  
+       return Redirect()->back()->with($notification);
     }
     public function EditPost($id)
     {
@@ -88,7 +89,7 @@ class PostController extends Controller
 
     	$post_image=$request->file('post_image');
     	if ($post_image) {
-            unlink($oldimage);
+            File::delete($oldimage);
     		    $image_one_name= hexdec(uniqid()).'.'.$post_image->getClientOriginalExtension();
                 Image::make($post_image)->resize(400,240)->save('public/media/post/'.$image_one_name);
                 $data['post_image']='public/media/post/'.$image_one_name;
@@ -105,7 +106,7 @@ class PostController extends Controller
                     'messege'=>'Successfully Post Updated ',
                     'alert-type'=>'success'
                    );
-               return Redirect()->rout('all.post')->with($notification);	
+               return Redirect()->rout('all.post')->with($notification);
        }
     }
 
