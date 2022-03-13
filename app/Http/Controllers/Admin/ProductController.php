@@ -18,7 +18,7 @@ class ProductController extends Controller
     public function index()
     {
         $product=DB::table('products')
-        ->leftJoin('categories','products.category_id','categoriegs.id')
+        ->leftJoin('categories','products.category_id','categories.id')
         ->leftJoin('brands','products.brand_id','brands.id')
         ->select('products.*','categories.category_name','brands.brand_name')
         ->get();
