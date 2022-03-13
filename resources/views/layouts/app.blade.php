@@ -230,7 +230,7 @@
                         <div class="footer_phone">{{ $setting->phone_two}}</div>
                         <div class="footer_contact_text">
                             <p>{{ $setting->company_address }}</p>
-                            <p>Malibagh Rail Gate</p>
+                            <p>Somaj kollan road mirpur</p>
                         </div>
                         <div class="footer_social">
                             <ul>
