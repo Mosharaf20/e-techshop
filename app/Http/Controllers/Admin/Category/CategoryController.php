@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\Admin\Category;
 use App\Model\Admin\Brand;
 use DB;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -98,7 +99,7 @@ class CategoryController extends Controller
             $upload_path='public/media/brand/';
             $image_url=$upload_path.$image_full_name;
             $success=$image->move($upload_path,$image_full_name);
-          
+
             $data['brand_logo']=$image_url;
             $brand=DB::table('brands')
                       ->insert($data);
@@ -106,7 +107,7 @@ class CategoryController extends Controller
                  'messege'=>'Successfully Brand Inserted ',
                  'alert-type'=>'success'
                 );
-            return Redirect()->back()->with($notification);                      
+            return Redirect()->back()->with($notification);
         }else{
           $brand=DB::table('brands')
                       ->insert($data);
@@ -114,23 +115,23 @@ class CategoryController extends Controller
                  'messege'=>'Done!',
                  'alert-type'=>'success'
                   );
-            return Redirect()->back()->with($notification); 
+            return Redirect()->back()->with($notification);
         }
-       
+
     }
     public function DeleteBrand($id)
     {
         $data = DB::table('brands')->where('id',$id)->first();
         $image=$data->brand_logo;
-        unlink($image);
+        File::delete([$image]);
         $brand=DB::table('brands')->where('id',$id)->delete();
         $notification=array(
              'messege'=>'Successfully Brand Deleted ',
              'alert-type'=>'success'
         );
-return Redirect()->back()->with($notification);   
-       
-     
+return Redirect()->back()->with($notification);
+
+
     }
 
     public function EditBrand($id)
@@ -145,7 +146,7 @@ return Redirect()->back()->with($notification);
         $data['brand_name']=$request->brand_name;
         $image=$request->file('brand_logo');
         if ($image) {
-            unlink($oldlogo);
+            File::delete([$oldlogo]);
             $image_name= date('dmy_H_s_i');
 
             $ext=strtolower($image->getClientOriginalExtension());
@@ -153,7 +154,7 @@ return Redirect()->back()->with($notification);
             $upload_path='public/media/brand/';
             $image_url=$upload_path.$image_full_name;
             $success=$image->move($upload_path,$image_full_name);
-          
+
             $data['brand_logo']=$image_url;
             $brand=DB::table('brands')->where('id', $id)
                       ->update($data);
@@ -161,15 +162,15 @@ return Redirect()->back()->with($notification);
                  'messege'=>'Brand update Successfully',
                  'alert-type'=>'success'
                 );
-            return Redirect()->route('brands')->with($notification);                      
+            return Redirect()->route('brands')->with($notification);
         }else{
           $brand=DB::table('brands')->where('id', $id)->update($data);
-                      
+
              $notification=array(
                  'messege'=>'whithout Update image!',
                  'alert-type'=>'success'
                   );
-            return Redirect()->route('brands')->with($notification); 
+            return Redirect()->route('brands')->with($notification);
         }
     }
     public function subcategories()
@@ -196,7 +197,7 @@ return Redirect()->back()->with($notification);
             'messege'=>'Sub category Inserted Successfully!',
             'alert-type'=>'success'
              );
-       return Redirect()->back()->with($notification); 
+       return Redirect()->back()->with($notification);
     }
     public function DeleteSubCat($id)
     {
@@ -225,6 +226,6 @@ return Redirect()->back()->with($notification);
             'messege'=>'Sub category Update Successfully!',
             'alert-type'=>'success'
              );
-       return Redirect()->route('sub.categories')->with($notification); 
+       return Redirect()->route('sub.categories')->with($notification);
     }
 }
