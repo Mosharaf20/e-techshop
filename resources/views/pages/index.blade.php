@@ -472,7 +472,7 @@ $products=DB::table('products')
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
                         <div class="advert_content">
-                            <div class="advert_title"><a href="#">Trends 2018</a></div>
+                            <div class="advert_title"><a href="#">Trends 2022</a></div>
                             <div class="advert_text">Lorem ipsum dolor sit amet, consectetur adipiscing Donec et.</div>
                         </div>
                         <div class="ml-auto"><div class="advert_image"><img src="{{ asset('public/frontend/images/adv_1.png') }}" alt=""></div></div>
@@ -485,7 +485,7 @@ $products=DB::table('products')
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
                         <div class="advert_content">
-                            <div class="advert_subtitle">Trends 2018</div>
+                            <div class="advert_subtitle">Trends 2022</div>
                             <div class="advert_title_2"><a href="#">Sale -45%</a></div>
                             <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
                         </div>
@@ -499,7 +499,7 @@ $products=DB::table('products')
 
                     <div class="advert d-flex flex-row align-items-center justify-content-start">
                         <div class="advert_content">
-                            <div class="advert_title"><a href="#">Trends 2018</a></div>
+                            <div class="advert_title"><a href="#">Trends 2022</a></div>
                             <div class="advert_text">Lorem ipsum dolor sit amet, consectetur.</div>
                         </div>
                         <div class="ml-auto"><div class="advert_image"><img src="{{ asset('public/frontend/images/adv_1.png') }}" alt=""></div></div>
